@@ -55,7 +55,7 @@ module SimpleParser
             end
           end
         end
-        raise "scan error" unless match
+        raise "scan error; remaing text:\n\n#{@scanner.post_match}" unless match
       end
       nil
     end

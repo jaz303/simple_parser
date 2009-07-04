@@ -102,6 +102,14 @@ module SimpleParser
       parse(text)
     end
     
+    def tokenizer
+      @tokenizer ||= build_tokenizer
+    end
+    
+    def build_tokenizer
+      Tokenizer.new(@token_rules)
+    end
+    
   private
   
     def parse_program
@@ -128,14 +136,6 @@ module SimpleParser
   
     def reset(text)
       tokenizer.reset(text)
-    end
-    
-    def tokenizer
-      @tokenizer ||= build_tokenizer
-    end
-    
-    def build_tokenizer
-      Tokenizer.new(@token_rules)
     end
   end
 end

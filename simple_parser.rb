@@ -126,8 +126,9 @@ module SimpleParser
   
     def accept(token = nil)
       raise "parse error, expecting #{token.inspect}" if token && token != token_name
+      retval = token_value
       @token = tokenizer.next_token
-      nil
+      retval
     end
     
     def stop

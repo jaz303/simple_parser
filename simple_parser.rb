@@ -6,6 +6,7 @@ module SimpleParser
     
     def initialize(rules)
       @rules = rules.map { |r|
+        r = r.dup
         pattern = r.shift
         pattern = /#{Regexp.quote(pattern)}/ if pattern.is_a?(String)
         [pattern, compile_rule(r)]

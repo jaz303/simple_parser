@@ -1,7 +1,6 @@
 require 'strscan'
 
 module SimpleParser
-  
   class Tokenizer
     include Enumerable
     

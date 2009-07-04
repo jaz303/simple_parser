@@ -44,18 +44,21 @@ module SimpleParser
   
     def fetch_next_token
       while !@scanner.eos?
-        match = false
-        @rules.each do |pattern, rule|
-          if raw_token = @scanner.scan(pattern)
-            match = true
-            if rule.nil?
-              break
-            else
-              return rule.call(raw_token)
+        pattern, rule, token = nil, nil, nil
+        @rules.each do |p, r|
+          if matched_token = @scanner.scan(p)
+            if token.nil? || matched_token.length > token.length
+              pattern, rule, token = p, r, matched_token
             end
+            @scanner.unscan
           end
         end
-        raise "scan error; remaing text:\n\n#{@scanner.post_match}" unless match
+        if pattern
+          @scanner.pos += token.length
+          return rule.call(token) unless rule.nil?
+        else
+          raise "scan error; remaing text:\n\n#{@scanner.post_match}"
+        end
       end
       nil
     end

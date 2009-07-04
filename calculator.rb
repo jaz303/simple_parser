@@ -61,5 +61,4 @@ private
   
 end
 
-c = Calculator.new
-puts c.eval("5 + (10 * (5 + 6)) / (2 + 2)")
+puts Calculator.new.eval("5 + (10 * (5 + 6)) / (2 + 2)")
